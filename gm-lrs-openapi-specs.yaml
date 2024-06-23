@@ -1,0 +1,99 @@
+---
+openapi: 3.0.0
+info:
+  title: Loyalty Reward system
+  version: 1.0.0
+  description: API for Loyalty Reward System for a retail store. This includes checking loyalty balance for existing users and enrollment for new members.
+paths:
+  "/getloyaltypoints/{UserId}":
+    get:
+      summary: Get a loyalty points balance for an user
+      description: Get a loyalty points balance for an user
+      operationId: getloyaltypoints
+      parameters:
+      - name : UserId
+        in: path
+        description: The UserId of the customer looking for Loyalty points balance
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful response containing the Loyalty points balance for an user 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  FirstName:
+                    type: string
+                    description: The name of the customer corresponding to UserId
+                  UserId:
+                    type: string
+                    description: The user id of the customer  
+                  Lpoints:
+                    type: integer
+                    description: Loyalty points balance
+                  Email:
+                    type: string
+                    description: The Email of the customer corresponding to UserId
+  /membership/enroll:
+    post:
+      summary: Enroll a new member
+      description: Creates a new membership in the loyalty reward system.
+      operationId: enrollMember
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                UserId:
+                  type: string
+                  description: The user id of the new member
+                FirstName:
+                  type: string
+                  description: The first name of the new member
+                LastName:
+                  type: string
+                  description: The last name of the new member
+                Email:
+                  type: string
+                  description: The email of the new member
+                  format: email
+                Phone:
+                  type: string
+                  description: The phone number of the new member
+                Address:
+                  type: string
+                  description: The address of the new member
+              required:
+                - UserId
+                - FirstName
+                - LastName
+                - Email
+      responses:
+        '200':
+          description: Membership successfully created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  UserId:
+                    type: string
+                    description: The user id of the new member
+                  message:
+                    type: string
+                    description: Success message
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    description: Error message

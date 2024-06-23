@@ -1,0 +1,41 @@
+{
+  "messageVersion": "1.0",
+  "agent": {
+    "name": "RewardBot",
+    "id": "agent-id-123",
+    "alias": "ATB",
+    "version": "1.0.0"
+  },
+  "inputText": "Get the Loyalty Reward Points balance for user",
+  "sessionId": "session-id-123",
+  "actionGroup": "getPointsBalanceGroup",
+  "apiPath": "/getloyaltypoints/{UserId}",
+  "httpMethod": "GET",
+  "parameters": [
+    {
+      "name": "UserId",
+      "type": "string",
+      "value": "user1"
+    }
+  ],
+  "requestBody": {
+    "content": {
+      "application/json": {
+        "properties": [
+          {
+            "name": "UserId",
+            "type": "string",
+            "value": "user1"
+          }
+        ]
+      }
+    }
+  },
+  "sessionAttributes": {
+    "attribute1": "value1",
+    "attribute2": "value2"
+  },
+  "promptSessionAttributes": {
+    "promptAttribute1": "promptValue1"
+  }
+}

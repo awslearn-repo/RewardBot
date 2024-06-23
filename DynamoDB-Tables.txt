@@ -1,0 +1,116 @@
+# delete tables
+
+aws dynamodb delete-table --table-name Products
+aws dynamodb delete-table --table-name Users
+aws dynamodb delete-table --table-name Orders
+aws dynamodb delete-table --table-name LoyaltyPoints
+
+#Create tables
+
+aws dynamodb create-table \
+    --table-name Products \
+    --attribute-definitions AttributeName=ProductId,AttributeType=S \
+    --key-schema AttributeName=ProductId,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+aws dynamodb create-table \
+    --table-name Users \
+    --attribute-definitions AttributeName=UserId,AttributeType=S \
+    --key-schema AttributeName=UserId,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+aws dynamodb create-table \
+    --table-name Orders \
+    --attribute-definitions AttributeName=OrderId,AttributeType=S \
+    --key-schema AttributeName=OrderId,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+aws dynamodb create-table \
+    --table-name LoyaltyPoints \
+    --attribute-definitions AttributeName=UserId,AttributeType=S \
+    --key-schema AttributeName=UserId,KeyType=HASH \
+    --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+# List DynamoDB tables
+
+aws dynamodb list-tables
+
+# Sample data
+
+## Products
+
+aws dynamodb put-item \
+    --table-name Products \
+    --item '{
+        "ProductId": {"S": "P001"},
+        "ProductName": {"S": "Product A"},
+        "Price": {"N": "20.00"},
+        "Stock": {"N": "100"}
+    }'
+
+aws dynamodb put-item \
+    --table-name Products \
+    --item '{
+        "ProductId": {"S": "P002"},
+        "ProductName": {"S": "Product B"},
+        "Price": {"N": "35.00"},
+        "Stock": {"N": "200"}
+    }'
+
+aws dynamodb put-item \
+    --table-name Products \
+    --item '{
+        "ProductId": {"S": "P003"},
+        "ProductName": {"S": "Product C"},
+        "Price": {"N": "50.00"},
+        "Stock": {"N": "150"}
+    }'
+
+#Users
+
+aws dynamodb put-item --table-name Users --item '{
+  "UserId": {"S": "user1"},
+  "FirstName": {"S": "John"},
+  "LastName": {"S": "Doe"},
+  "Email": {"S": "john.doe@example.com"},
+  "Phone": {"S": "+1234567890"},
+  "Address": {"S": "123 Main St, Anytown, AT 12345"},
+  "Lpoints": {"N": "150.75"}
+}'
+
+aws dynamodb put-item --table-name Users --item '{
+  "UserId": {"S": "user2"},
+  "FirstName": {"S": "Jane"},
+  "LastName": {"S": "Smith"},
+  "Email": {"S": "jane.smith@example.com"},
+  "Phone": {"S": "+1987654321"},
+  "Address": {"S": "456 Elm St, Othertown, OT 54321"},
+  "Lpoints": {"N": "200.50"}
+}'
+
+aws dynamodb put-item --table-name Users --item '{
+  "UserId": {"S": "user3"},
+  "FirstName": {"S": "Alice"},
+  "LastName": {"S": "Johnson"},
+  "Email": {"S": "alice.johnson@example.com"},
+  "Phone": {"S": "+1123456789"},
+  "Address": {"S": "789 Oak St, Sometown, ST 67890"},
+  "Lpoints": {"N": "99.99"}
+}'
+
+# LoyaltyPoints
+
+aws dynamodb put-item --table-name LoyaltyPoints --item '{
+  "UserId": {"S": "user1"},
+  "Balance": {"N": "150.75"}
+}'
+
+aws dynamodb put-item --table-name LoyaltyPoints --item '{
+  "UserId": {"S": "user2"},
+  "Lpoints": {"N": "200.50"}
+}'
+
+aws dynamodb put-item --table-name LoyaltyPoints --item '{
+  "UserId": {"S": "user3"},
+  "Lpoints": {"N": "99.99"}
+}'
